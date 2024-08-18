@@ -1,0 +1,63 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    oultine: 2px solid black;
+}
+
+#container {
+    background: black;
+    border: 10px solid grey;
+    border-radius: 5px;
+    height: 50%;
+    font-size: 0;
+    padding: 1px;
+}
+
+#display {
+    text-align: right;
+    color: white;
+    font-size: 80px;
+    font-family: "Comic Sans", monospace;
+    padding-right: 16px;
+}
+
+button {
+    font-size: 64px;
+    width: 96px;
+    margin: 2px;
+    border: 0;
+    border-radius: 5px;
+    color: rgb(219, 228, 238);
+}
+
+#clear, #zero {
+    width: 196px;
+}
+
+.edit {
+    background: rgb(5, 74, 145);
+}
+
+.edit:hover {
+    background: rgb(5, 64, 125);
+}
+
+.operation {
+    background: rgb(62, 124, 177);
+}
+
+.operation:hover {
+    background: rgb(42, 104, 157);
+}
+
+.input {
+    background: rgb(129, 164, 205);
+}
+
+.input:hover {
+    background: rgb(109, 139, 185);
+}
+
