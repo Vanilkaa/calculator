@@ -19,15 +19,17 @@ html, body {
 #display {
     text-align: right;
     color: white;
-    font-size: 80px;
+    font-size: 64px;
     font-family: "Comic Sans", monospace;
-    padding-right: 16px;
+    padding-right: 8px;
 }
 
 button {
-    font-size: 64px;
+    font-size: 32px;
     width: 96px;
+    height: 72px;
     margin: 2px;
+    padding: 4px;
     border: 0;
     border-radius: 5px;
     color: rgb(219, 228, 238);
