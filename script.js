@@ -6,6 +6,8 @@ const operators = Array.from(document.querySelectorAll(".operation"));
 const operate = document.querySelector("#operate");
 
 let clearDisplayForNum2 = true;
+let operatorInput = true;
+
 inputs.forEach((input) => input.onclick = () => {
             if(operator != undefined && clearDisplayForNum2 == true) {
                 display.textContent = "";
@@ -18,6 +20,7 @@ inputs.forEach((input) => input.onclick = () => {
             input.textContent != "." ?
                 display.textContent = (input.textContent) :
                 display.textContent += (input.textContent);
+            operatorInput = true;
             });
 
 backspace.onclick = () => { if(display.textContent.length == 1) {
@@ -37,11 +40,13 @@ let num1, num2, operator;
 
 operators.pop();
 operators.forEach((e) => e.onclick = () => {
+    if(operatorInput != true) return;
     if(num1 != undefined) {
         operate.onclick();
     }
     num1 = +display.textContent;
     operator = e.textContent;
+    operatorInput = false;
 });
 
 operate.onclick = () => {
