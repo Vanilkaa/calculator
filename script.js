@@ -1,58 +1,77 @@
 const display = document.querySelector("#display");
 const inputs = Array.from(document.querySelectorAll(".input"));
+const backspace = document.querySelector("#backspace");
+const clear = document.querySelector("#clear");
+const operators = Array.from(document.querySelectorAll(".operation"));
+const operate = document.querySelector("#operate");
 
+let clearDisplayForNum2 = true;
 inputs.forEach((input) => input.onclick = () => {
+            if(operator != undefined && clearDisplayForNum2 == true) {
+                display.textContent = "";
+                clearDisplayForNum2 = false;
+            }
             if(display.textContent.length > 9 || 
                 input.textContent == "." && 
                 display.textContent.includes(".")) return;
             display.textContent == "0" && 
-                input.textContent != "." ?
-                    display.textContent = (input.textContent) :
-                    display.textContent += (input.textContent);
+            input.textContent != "." ?
+                display.textContent = (input.textContent) :
+                display.textContent += (input.textContent);
             });
 
-const backspace = document.querySelector("#backspace");
-backspace.onclick = () => {
-    if(display.textContent.length == 1) {
+backspace.onclick = () => { if(display.textContent.length == 1) {
         display.textContent = "0";
         return;
     }
     display.textContent = display.textContent.slice(0, -1);
 }
 
-const clear = document.querySelector("#clear");
 clear.onclick = () => {
     display.textContent = "0";
-}
-
-function add(num1, num2) {
-    return num1 + num2;
-}
-
-function subtract(num1, num2) {
-    return num1 - num2;
-}
-
-function multiply(num1, num2) {
-    return num1 * num2;
-}
-
-function divide(num1, num2) {
-    return num1 / num2;
+    num1 = num2 = operator = undefined;
+    clearDisplayForNum2 = true;
 }
 
 let num1, num2, operator;
 
-function operate(operator, num1, num2) {
+operators.pop();
+operators.forEach((e) => e.onclick = () => {
+    if(num1 != undefined) {
+        operate.onclick();
+    }
+    num1 = +display.textContent;
+    operator = e.textContent;
+});
+
+operate.onclick = () => {
+    if(num1 == undefined) return;
+    num2 = +display.textContent;
+    let solution = solve(operator, num1, num2);
+    solution = parseFloat(solution.toString()).toString(); 
+    if(solution.length > 10) {
+        if(!solution.includes(".")) {
+            solution.slice(0, 10);
+        } else {
+            solution = Number(solution).toFixed(9 - solution.split(".")[0].length);
+        }
+    }
+    display.textContent = num2 == 0 && operator == "/" ?
+        "nah" : solution;
+    num1 = num2 = operator = undefined;
+    clearDisplayForNum2 = true;
+}
+
+function solve(operator, num1, num2) {
     switch(operator) {
         case "+":
-            add(num1, num2);
+            return num1 + num2;
         case "-":
-            subtract(num1, num2);
+            return num1 - num2;
         case "*":
-            multiply(num1, num2);
+            return num1 * num2;
         case "/":
-            divide(num1, num2);
+            return num1 / num2;
     }
 }
 
